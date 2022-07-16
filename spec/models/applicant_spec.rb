@@ -12,5 +12,7 @@ RSpec.describe Applicant do
     it { should validate_presence_of(:description) }
     it { should validate_presence_of(:status) }
     it { should validate_presence_of(:zip) }
+    it { should validate_presence_of(:city) }
+    it { should validate_presence_of(:state) }
   end
 end
