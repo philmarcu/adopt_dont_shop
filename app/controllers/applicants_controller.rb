@@ -5,7 +5,11 @@ class ApplicantsController < ApplicationController
   end
 
   def show
-    @applicant = Applicant.find(params[:applicant_id])
+    @applicant = Applicant.find(params[:id])
+    
+    if params[:pet_name]
+      @new_pets = Pet.pet_search(params[:pet_name])
+    end
   end
 
   def create
