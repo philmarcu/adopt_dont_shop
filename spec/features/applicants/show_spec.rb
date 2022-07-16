@@ -19,7 +19,7 @@ RSpec.describe 'applicant show page' do
 
 
     visit "/applications/#{bob_1.id}"
-    
+
     expect(page).to have_content("Billy Bob")
     expect(page).to have_content("Street address 6093")
     expect(page).to have_content("I'm bob")
@@ -45,8 +45,8 @@ RSpec.describe 'applicant show page' do
     app_1 = ApplicantPet.create(applicant: bob_1, pet: pet_1)
     app_2 = ApplicantPet.create(applicant: bob_1, pet: pet_4)
 
-    visit "/applicants/#{bob_1.id}"
-    expect(current_path).to eq("/applicants/#{bob_1.id}")
+    visit "/applications/#{bob_1.id}"
+    expect(current_path).to eq("/applications/#{bob_1.id}")
 
     expect(page).to have_content("In Progress")
     expect(page).to_not have_content('Clawdia')
@@ -55,7 +55,7 @@ RSpec.describe 'applicant show page' do
     fill_in 'pet_name', with: 'Clawdia'
     click_on 'Submit'
 
-    expect(current_path).to eq("/applicants/#{bob_1.id}")
+    expect(current_path).to eq("/applications/#{bob_1.id}")
     expect(page).to have_content('Clawdia')
   end
 end
