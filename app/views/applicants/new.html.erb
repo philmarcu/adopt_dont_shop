@@ -1,5 +1,5 @@
 <h1>Pet Adoption Form</h1>
-<%= form_with url: "/pets", method: :post, local: true do |f| %>
+<%= form_with url: "/applications/:applicant_id", method: :post, local: true do |f| %>
 <%= f.label :name %>
 <%= f.text_field :name %>
 <%= f.label :address %>
@@ -12,5 +12,6 @@
 <%= f.text_field :state %>
 <%= f.label :description %>
 <%= f.text_field :description %>
+<%= f.select :status, ['In Progress'] %>
 <%= f.submit %>
 <% end %>

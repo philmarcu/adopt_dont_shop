@@ -8,4 +8,6 @@ class Applicant < ApplicationRecord
   validates :state, presence: true
   has_many :applicant_pets
   has_many :pets, through: :applicant_pets
+
+  
 end

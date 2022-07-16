@@ -25,26 +25,28 @@ RSpec.describe 'New Applicant form page' do
     expect(find('form')).to have_content('State')
     expect(find('form')).to have_content('Description')
   end
+
+  describe 'applicant create' do
+    context 'valid data' do
+      it 'creates a new applicant and returns to show' do        
+        visit '/applications/new'
+        
+        fill_in 'Name', with: 'Billy Bob'
+        fill_in 'Address', with: 'Street address 6093'
+        fill_in 'Zip', with: 22323
+        fill_in 'City', with: 'Denver'
+        fill_in 'State', with: 'CO'
+        fill_in 'Description', with: "I'm bob"
+        select 'In Progress', from: 'status'
+        
+        click_button 'Save'
+
+        expect(page).to have_content("Billy Bob")
+        expect(page).to have_content("Street address 6093")
+        expect(page).to have_content("I'm bob")
+        expect(page).to have_content("In Progress")
+        expect(page).to have_content(22323)
+      end
+    end
+  end
 end
-
-
-
-
-
-# Starting an Application
-
-# As a visitor
-# When I visit the pet index page
-# Then I see a link to "Start an Application"
-# When I click this link
-# Then I am taken to the new application page where I see a form
-# When I fill in this form with my:
-#   - Name
-#   - Street Address
-#   - City
-#   - State
-#   - Zip Code
-# And I click submit
-# Then I am taken to the new application's show page
-# And I see my Name, address information, and description of why I would make a good home
-# And I see an indicator that this application is "In Progress"
