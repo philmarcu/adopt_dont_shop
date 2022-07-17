@@ -78,7 +78,7 @@ RSpec.describe 'applicant show page' do
     expect(current_path).to eq("/applications/#{bob_1.id}")
 
     click_on 'Adopt Clawdia'
-
+    save_and_open_page
     expect(page).to have_link('Clawdia')
   end
 end
