@@ -82,7 +82,7 @@ RSpec.describe 'applicant show page' do
   end
   describe 'user story 6 + 8' do
     context 'submits the application' do
-      it 'goes to a submit application page' do
+      it 'goes to a submit application section in show page' do
         shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
 
         bob_1 = Applicant.create(name: "Billy Bob", address: "Street address 6093", zip: 22323, city: "denver", state: "CO", description: "Something")
@@ -101,6 +101,19 @@ RSpec.describe 'applicant show page' do
         expect(page).to have_content('Mr. Pirate')
         expect(page).to have_content('Ann')
         expect(page).to have_content("Pending")
+      end
+
+      it 'does not show submit section if no pet is added' do
+        shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+
+        bob_1 = Applicant.create(name: "Billy Bob", address: "Street address 6093", zip: 22323, city: "denver", state: "CO", description: "Something")
+
+        pet_1 = shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: false)
+        pet_2 = shelter_1.pets.create(name: 'Ann', breed: 'ragdoll', age: 5, adoptable: true)
+
+        visit "/applications/#{bob_1.id}"
+
+        expect(page).to_not have_content('Submit Your Application')
       end
     end
   end
