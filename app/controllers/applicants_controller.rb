@@ -22,8 +22,14 @@ class ApplicantsController < ApplicationController
     end
   end
 
+  def stat_update
+    @applicant = Applicant.find(params[:id])
+    @applicant.update!(app_status: params[:app_status], description: params[:description])
+    redirect_to "/applications/#{@applicant.id}"
+  end
+
   private
   def applicant_params
-    params.permit(:name, :address, :description, :zip, :city, :state)
+    params.permit(:name, :address, :zip, :city, :state)
   end
 end

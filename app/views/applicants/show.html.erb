@@ -1,6 +1,6 @@
 <h1> <%= @applicant.name %> </h1>
-<p> Address: <%= @applicant.address %>, <%= @applicant.city %> <%= @applicant.state%>, <%= @applicant.zip%> </p>
-<p> Description: <%= @applicant.description%> </p>
+<p> Address: <%= @applicant.address %>, <%= @applicant.city %> <%= @applicant.state%>, <%= @applicant.zip%></p>
+<%= @applicant.description %>
 <p> Status: <%= @applicant.app_status%> </p>
 <h1> Pets Applied for: </h1>
 <% @applicant.pets.each do |pet|%>
@@ -14,5 +14,13 @@
       <% end %>
   <% if @new_pets.present?%>
       <%= @new_pets.name %>
+  <% end %>
+<% end %>
+<% if @applicant.pets.count >= 1 %>
+  <%= form_with url: "/applications/#{@applicant.id}",  method: :patch, local: true, skip_enforcing_utf8: true do |form|%>
+    <%= form.select :app_status, ["Pending"] %>
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+    <%= form.submit "Submit Your Application", name: nil %><br>
   <% end %>
 <% end %>
