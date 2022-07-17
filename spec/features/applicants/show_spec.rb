@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'applicant show page' do
-
   it 'user story 1' do
     shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
     shelter_2 = Shelter.create(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5)
@@ -57,5 +56,29 @@ RSpec.describe 'applicant show page' do
 
     expect(current_path).to eq("/applications/#{bob_1.id}")
     expect(page).to have_content('Clawdia')
+  end
+
+  it 'user story 5' do
+    shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+    shelter_2 = Shelter.create(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5)
+    shelter_3 = Shelter.create(name: 'Fancy pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10)
+    bob_1 = Applicant.create(name: "Billy Bob", address: "Street address 6093", description: "I'm bob", zip: 22323, city: "denver", state: "CO")
+    pet_1 = shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: false)
+    pet_2 = shelter_2.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
+    pet_3 = shelter_3.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
+    pet_4 = shelter_1.pets.create(name: 'Ann', breed: 'ragdoll', age: 5, adoptable: true)
+    app_1 = ApplicantPet.create(applicant: bob_1, pet: pet_1, status: "In Progress")
+    app_2 = ApplicantPet.create(applicant: bob_1, pet: pet_4, status: "In Progress")
+
+    visit "/applications/#{bob_1.id}"
+    expect(current_path).to eq("/applications/#{bob_1.id}")
+
+    fill_in 'pet_name', with: 'Clawdia'
+    click_on 'Submit'
+    expect(current_path).to eq("/applications/#{bob_1.id}")
+
+    click_on 'Adopt Clawdia'
+
+    expect(page).to have_link('Clawdia')
   end
 end
