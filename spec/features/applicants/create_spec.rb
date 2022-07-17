@@ -37,8 +37,7 @@ RSpec.describe 'New Applicant form page' do
         fill_in 'City', with: 'Denver'
         fill_in 'State', with: 'CO'
         fill_in 'Description', with: "I'm bob"
-        select 'In Progress', from: 'status'
-        
+                
         click_button 'Save'
 
         expect(page).to have_content("Billy Bob")
