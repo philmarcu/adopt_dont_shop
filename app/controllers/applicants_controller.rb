@@ -6,7 +6,7 @@ class ApplicantsController < ApplicationController
 
   def show
     @applicant = Applicant.find(params[:id])
-    
+      require "pry"; binding.pry
     if params[:pet_name]
       @new_pets = Pet.pet_search(params[:pet_name])
     end
