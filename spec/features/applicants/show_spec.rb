@@ -57,7 +57,7 @@ RSpec.describe 'applicant show page' do
     expect(page).to have_content('Clawdia')
   end
 
-  xit 'user story 5' do
+  it 'user story 5' do
     shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
     shelter_2 = Shelter.create(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5)
     shelter_3 = Shelter.create(name: 'Fancy pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10)
@@ -77,7 +77,7 @@ RSpec.describe 'applicant show page' do
     expect(current_path).to eq("/applications/#{bob_1.id}")
 
     click_on 'Adopt Clawdia'
-    save_and_open_page
+
     expect(page).to have_link('Clawdia')
   end
   describe 'user story 6 + 8' do
