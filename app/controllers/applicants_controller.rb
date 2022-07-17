@@ -13,7 +13,6 @@ class ApplicantsController < ApplicationController
 
   def create
     @applicant = Applicant.new(applicant_params)
-
     if @applicant.save
       redirect_to "/applications/#{@applicant.id}"
     else

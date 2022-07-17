@@ -13,6 +13,12 @@
       <%= form.submit "Submit", name: nil %>
       <% end %>
   <% if @new_pets.present?%>
-      <%= @new_pets.name %>
+    <% @new_pets.each do |pet| %>
+      <p> <%= pet.name %>
+      <%= form_with url: "/applications/#{@applicant.id}/add", method: :get, local: true, skip_enforcing_utf8: true do |form|%>
+      <%= form.select :chosen_pet, ["#{pet.id}"] %>
+      <%= form.submit "Adopt #{pet.name}", name: nil %>
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>

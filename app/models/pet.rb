@@ -14,6 +14,6 @@ class Pet < ApplicationRecord
   end
 
   def self.pet_search(pet_name)
-      find_by(name: pet_name)
+      where(name: pet_name)
   end
 end
