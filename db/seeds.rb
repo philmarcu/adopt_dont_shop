@@ -18,10 +18,14 @@ pet_1 = shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age
 pet_2 = shelter_2.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
 pet_3 = shelter_3.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
 pet_4 = shelter_1.pets.create(name: 'Ann', breed: 'ragdoll', age: 5, adoptable: true)
+pet_5 = shelter_1.pets.create(name: 'Bailey', breed: 'labrador', age: 2, adoptable: true)
+pet_6 = shelter_2.pets.create(name: 'Worf', breed: 'great dane', age: 4, adoptable: false)
+pet_7 = shelter_1.pets.create(name: 'Patches', breed: 'beagle', age: 7, adoptable: true)
 
-bob_1 = Applicant.create(name: "Billy Bob", address: "Street address 6093", description: "I'm bob", zip: 22323, city: "denver", state: "CO", app_status: "In Progress")
-bob_2 = Applicant.create(name: "Freiza", address: "Acne Lane 80422", description: "I'm freiza 2", zip: 80029, city: "denver", state: "CO", app_status: "In Progress")
-bob_3 = Applicant.create(name: "James Maddy", address: "Street address 6093", description: "I'm bob", zip: 31123, city: "denver", state: "CO", app_status: "In Progress")
+bob_1 = Applicant.create(name: "Billy Bob", address: "Street address 6093", description: "I'm bob", zip: 22323, city: "Denver", state: "CO", app_status: "In Progress")
+bob_2 = Applicant.create(name: "Freiza", address: "Acne Lane 80422", description: "I'm freiza 2", zip: 80029, city: "Namek", state: "NH", app_status: "In Progress")
+bob_3 = Applicant.create(name: "James Maddy", address: "3072 Wallaby Way", description: "Pets please", zip: 31123, city: "Sydney", state: "AL", app_status: "In Progress")
+bob_4 = Applicant.create(name: "Harvey Birdman", address: "1723 Porter St", description: "Justice!", zip: 31123, city: "Denver", state: "CO", app_status: "In Progress")
 
 app_1 = ApplicantPet.create(applicant: bob_1, pet: pet_1, status: "In Progress")
 app_2 = ApplicantPet.create(applicant: bob_1, pet: pet_4, status: "In Progress")
