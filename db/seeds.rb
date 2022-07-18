@@ -31,3 +31,6 @@ app_1 = ApplicantPet.create(applicant: bob_1, pet: pet_1, status: "In Progress")
 app_2 = ApplicantPet.create(applicant: bob_1, pet: pet_4, status: "In Progress")
 app_3 = ApplicantPet.create(applicant: bob_2, pet: pet_2, status: "In Progress")
 app_4 = ApplicantPet.create(applicant: bob_3, pet: pet_3, status: "In Progress")
+app_5 = ApplicantPet.create(applicant: bob_4, pet: pet_7, status: "In Progress")
+app_6 = ApplicantPet.create(applicant: bob_4, pet: pet_6, status: "In Progress")
+
