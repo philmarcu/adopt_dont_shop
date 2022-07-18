@@ -1,3 +1,3 @@
-class Admin < ApplicationController
+class AdminsController < ApplicationController
 
 end
