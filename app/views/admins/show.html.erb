@@ -1,13 +1,19 @@
 <h1> <%= @applicant.name %> </h1>
+
 <p> Address: <%= @applicant.address %>, <%= @applicant.city %> <%= @applicant.state%>, <%= @applicant.zip%></p>
 <p> Status: <%= @applicant.app_status%> </p>
 <p> Description: <%= @applicant.description%> </p>
+
 <h1> Pets Applied for: </h1>
+
 <% @applicant.applicant_pets.each do |app|%>
   <h3> <%="#{app.pet.name}" %> </h3>
   <% if app.status == "In Progress" %>
     <p> <%= button_to "Approve #{app.pet.name}", "/admin/applications/#{app.id}/sendapprove", method: :patch, local: true, params: {id: app.id}%> </p>
+    <p> <%= button_to "Reject #{app.pet.name}", "/admin/applications/#{app.id}/sendreject", method: :patch, local: true, params: {id: app.id}%> </p>
   <% elsif app.status == "Approved"%>
     <p> <%= "#{app.pet.name} Approved!"%> </p>
+  <% elsif app.status == "Rejected"%>
+    <p> <%= "#{app.pet.name} Rejected"%> </p>
   <% end %>
 <% end %>
