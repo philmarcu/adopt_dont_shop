@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe 'admin shelter index page' do
-  context 'reverse order shelter alphabetical' do
+  context 'reverse order shelter names alphabetical' do
     it 'displays all shelter names in reverse' do
       shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
       shelter_2 = Shelter.create(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5)

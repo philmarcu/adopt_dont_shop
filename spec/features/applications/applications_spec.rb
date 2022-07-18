@@ -44,4 +44,15 @@ RSpec.describe 'applicant' do
     expect(page).to have_link("Veterinarians")
     expect(page).to have_link("Veterinary Offices")
   end
+
+  it 'displays a link to start an application' do
+    visit '/'
+    expect(page).to have_link("Start an Application")
+    click_link("Start an Application")
+    expect(find('form')).to have_content('Name')
+    expect(find('form')).to have_content('Address')
+    expect(find('form')).to have_content('Zip')
+    expect(find('form')).to have_content('City')
+    expect(find('form')).to have_content('State')
+  end
 end
