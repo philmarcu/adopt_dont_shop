@@ -80,6 +80,7 @@ RSpec.describe 'applicant show page' do
 
     expect(page).to have_link('Clawdia')
   end
+
   describe 'user story 6 + 8' do
     context 'submits the application' do
       it 'goes to a submit application section in show page' do
@@ -171,6 +172,23 @@ RSpec.describe 'applicant show page' do
 
         expect(current_path).to eq("/applications/#{bob_1.id}")
         expect(page).to have_content('Cleopatra')
+      end
+
+      it 'does not show submit form if applicant is not in progress' do
+        shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+
+        bob_1 = Applicant.create(name: "Billy Bob", address: "Street address 6093", zip: 22323, city: "denver", state: "CO", description: "Something", app_status: "Pending")
+
+        pet_1 = shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: false)
+        pet_2 = shelter_1.pets.create(name: 'Ann', breed: 'ragdoll', age: 5, adoptable: true)
+
+        app_1 = ApplicantPet.create(applicant: bob_1, pet: pet_1, status: "In Progress")
+        app_2 = ApplicantPet.create(applicant: bob_1, pet: pet_2, status: "In Progress")
+
+        visit "/applications/#{bob_1.id}"
+      
+        expect(page).to have_content("Pending")
+        expect(page).to_not have_content('Submit Your Application')
       end
     end
   end

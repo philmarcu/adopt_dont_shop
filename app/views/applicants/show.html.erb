@@ -22,7 +22,7 @@
     <% end %>
   <% end %>
 <% end %>
-<% if @applicant.pets.count >= 1 %>
+<% if @applicant.pets.count >= 1 && @applicant.app_status == "In Progress" %>
   <%= form_with url: "/applications/#{@applicant.id}",  method: :patch, local: true, skip_enforcing_utf8: true do |form|%>
     <%= form.select :app_status, ["Pending"] %>
     <%= form.label :description %>
