@@ -146,6 +146,32 @@ RSpec.describe 'applicant show page' do
         expect(current_path).to eq("/applications/#{bob_1.id}")
         expect(page).to have_content('Lucille Bald')
       end
+
+      it 'can case insensitive search for pet name' do
+        shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+
+        bob_1 = Applicant.create(name: "Billy Bob", address: "Street address 6093", zip: 22323, city: "denver", state: "CO", description: "Something")
+
+        pet_1 = shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: false)
+        pet_2 = shelter_1.pets.create(name: 'Cleopatra', breed: 'ragdoll', age: 5, adoptable: true)
+
+        visit "/applications/#{bob_1.id}"
+
+        expect(page).to_not have_content('Mr. Pirate')
+        expect(page).to_not have_content('Ann')
+
+        fill_in 'pet_name', with: 'mR. pIrAtE'
+        click_on 'Submit'
+
+        expect(current_path).to eq("/applications/#{bob_1.id}")
+        expect(page).to have_content('Mr. Pirate')
+
+        fill_in 'pet_name', with: 'cLeoPa'
+        click_on 'Submit'
+
+        expect(current_path).to eq("/applications/#{bob_1.id}")
+        expect(page).to have_content('Cleopatra')
+      end
     end
   end
 end
