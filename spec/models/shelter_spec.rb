@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Shelter, type: :model do
   describe 'relationships' do
     it { should have_many(:pets) }
+    it {should have_many(:applicant_pets).through(:pets)}
+
   end
 
   describe 'validations' do
@@ -21,6 +23,13 @@ RSpec.describe Shelter, type: :model do
     @pet_2 = @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
     @pet_3 = @shelter_3.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
     @pet_4 = @shelter_1.pets.create(name: 'Ann', breed: 'ragdoll', age: 5, adoptable: true)
+
+    @bob_1 = Applicant.create(name: "Billy Bob", address: "Street address 6093", description: "I'm bob", zip: 22323, city: "Denver", state: "CO", app_status: "Pending")
+    @bob_2 = Applicant.create(name: "Freiza", address: "Acne Lane 80422", description: "I'm freiza 2", zip: 80029, city: "Namek", state: "NH", app_status: "Pending")
+    @bob_3 = Applicant.create(name: "James Maddy", address: "3072 Wallaby Way", description: "Pets please", zip: 31123, city: "Sydney", state: "AL", app_status: "Pending")
+
+    @app_1 = ApplicantPet.create(applicant: @bob_1, pet: @pet_1, status: "In Progress")
+    @app_4 = ApplicantPet.create(applicant: @bob_3, pet: @pet_3, status: "In Progress")
   end
 
   describe 'class methods' do
@@ -47,6 +56,12 @@ RSpec.describe Shelter, type: :model do
         expect(Shelter.order_by_reverse_name).to eq([@shelter_2, @shelter_3, @shelter_1])
       end
     end
+
+    describe '#pending_apps' do
+      it 'returns shelters with pending apps' do
+        expect(Shelter.pending_apps).to eq([@shelter_1, @shelter_3])
+      end
+    end
   end
 
   describe 'instance methods' do
@@ -71,6 +86,12 @@ RSpec.describe Shelter, type: :model do
     describe '.pet_count' do
       it 'returns the number of pets at the given shelter' do
         expect(@shelter_1.pet_count).to eq(3)
+      end
+    end
+
+    describe '.pending_shelter_names' do
+      it 'returns shelter names that have pending applications' do
+
       end
     end
   end

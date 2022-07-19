@@ -6,13 +6,22 @@
   <%= f.label :search %>
   <%= f.text_field :search %>
   <%= f.submit "Search" %>
+<% end %><br>
+
+<h2>Shelters with Pending Applications</h2>
+<% @shelters_pending_apps.each do |pending| %>
+  <div id="pending-<%= pending.id %>">
+    <p><%= pending.name %></p>
+  </div>
 <% end %>
 
-<% @shelters.each_with_index do |shelter, index| %>
-  <div id="shelter-<%= index %>">
+<% @shelters.each do |shelter| %>
+  <div id="shelter-<%= shelter.id %>">
     <h3><%= shelter.name %></h3>
     <p>Created at: <%= shelter.created_at %></p>
     <%= link_to "Update #{shelter.name}", "/shelters/#{shelter.id}/edit" %>
     <%= link_to "Delete #{shelter.name}", "/shelters/#{shelter.id}", method: :delete %>
   </div>
 <% end %>
+
+
