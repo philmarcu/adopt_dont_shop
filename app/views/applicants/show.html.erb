@@ -28,5 +28,6 @@
     <%= form.label :description %>
     <%= form.text_field :description %>
     <%= form.submit "Submit Your Application", name: nil %><br>
+    <% @applicant.app_status = "Pending" %>
   <% end %>
 <% end %>
