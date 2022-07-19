@@ -1,4 +1,5 @@
 class AdminsController < ApplicationController
+
  def show
    @applicant = Applicant.find(params[:id])
  end
@@ -15,5 +16,10 @@ class AdminsController < ApplicationController
    @app_1.update(status: "Rejected")
    @app_1.save
    redirect_to "/admin/applications/#{@app_1.applicant_id}"
+ end
+
+ def index
+  @shelters = Shelter.order_by_reverse_name
+  @shelters_pending_apps = Shelter.pending_apps
  end
 end

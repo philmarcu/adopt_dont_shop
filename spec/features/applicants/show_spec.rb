@@ -16,7 +16,6 @@ RSpec.describe 'applicant show page' do
     app_1 = ApplicantPet.create(applicant: bob_1, pet: pet_1, status: "In Progress")
     app_2 = ApplicantPet.create(applicant: bob_1, pet: pet_4, status: "In Progress")
 
-
     visit "/applications/#{bob_1.id}"
 
     expect(page).to have_content("Billy Bob")
