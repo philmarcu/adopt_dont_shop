@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
   get '/applications/:id/add', to: 'applicant_pets#add'
 
+  get '/admin/applications/:id', to: 'admins#show'
+  patch '/admin/applications/:id/sendapprove', to: 'admins#sendapprove'
+  patch '/admin/applications/:id/sendreject', to: 'admins#sendreject'
+
   get '/shelters', to: 'shelters#index'
   get '/shelters/new', to: 'shelters#new'
   get '/shelters/:id', to: 'shelters#show'
