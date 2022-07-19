@@ -26,7 +26,7 @@ RSpec.describe 'New Applicant form page' do
   end
 
   describe 'applicant create' do
-    context 'valid data' do
+    context 'given valid data' do
       it 'creates a new applicant and returns to show' do        
         visit '/applications/new'
         
@@ -42,6 +42,23 @@ RSpec.describe 'New Applicant form page' do
         expect(page).to have_content("Street address 6093")
         expect(page).to have_content("In Progress")
         expect(page).to have_content(22323)
+      end
+    end
+
+    context "given invalid data" do
+      it 're-renders the edit form' do
+        visit '/applications/new'
+
+        fill_in 'Name', with: ''
+        fill_in 'Address', with: ''
+        fill_in 'Zip', with: 22323
+        fill_in 'City', with: 'Denver'
+        fill_in 'State', with: 'CO'
+
+        click_button 'Save'
+  
+        expect(page).to have_content("Error: Name can't be blank, Address can't be blank")
+        expect(page).to have_current_path("/applications/new")
       end
     end
   end
